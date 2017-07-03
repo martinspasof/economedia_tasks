@@ -1,15 +1,16 @@
 function createTableNewsToday(news_data) {
-    var myTable = "<table id='myTable' class='table'><thead><tr><th style='width: 100px; color: red;'>#</th>";
-    myTable += "<th style='width: 2px; color: red;'>Image</th>";
-    myTable += "<th style='width: 100px; color: red;'>Title</th>";
-    myTable += "<th style='width: 100px; color: red;'>Description</th>";
-    myTable += "<th style='width: 100px; color: red;' onclick=\"sortTable(4,false)\">Date</th>"
-    myTable += "<th style='width: 100px; color: red;' onclick=\"sortTable(5,false)\">Author</th>";
-    myTable += "<th style='width: 100px; color: red;' onclick=\"sortTable(6,true)\">Count of comments</th>";
-    myTable += "<th style='width: 100px; color: red;'>Address to Issue</th></tr>";
+    var myTable = "<table id='myTable' class='table'><thead><tr><th style='width: 100px;'>#</th>";
+    myTable += "<th style='width: 2px;'>Image</th>";
+    myTable += "<th style='width: 100px; '>Title</th>";
+    myTable += "<th style='width: 100px; '>Description</th>";
+    myTable += "<th style='width: 100px; ' onclick=\"sortTable(4,false)\">Date</th>"
+    myTable += "<th style='width: 100px; ' onclick=\"sortTable(5,false)\">Author</th>";
+    myTable += "<th style='width: 100px; ' onclick=\"sortTable(6,true)\">Count of comments</th>";
+    myTable += "<th style='width: 100px; '>Address to Issue</th></tr>";
     myTable += "</thead><tbody>";
 
     var row = 0;
+    var itemsPerPage = 0;
     for (index = 0; index < news_data.length; index++) {
         if ((news_data[index]['img_src'] === undefined) || (news_data[index]['author'] === '') || (news_data[index]['count_comments'] === '')) {
             continue;
@@ -23,8 +24,8 @@ function createTableNewsToday(news_data) {
         myTable += "<td style='width: 100px;'><div style='width: 120px;'>" + news_data[index]['count_comments'] + "</div></td>";
         myTable += "<td style='width: 100px;'><div style='width: 120px;word-break: break-all' >" + news_data[index]['link'] + "</div></td></tr>";
 
+        itemsPerPage++;
     }
-
 
     myTable += "</tbody></table>";
 
@@ -58,7 +59,7 @@ function sortTable(cellNumber, isNumber) {
                     shouldSwitch = true;
                     break;
                 }
-            }else{
+            } else {
                 //check if the two rows should switch place:
                 if (x.innerText.toLowerCase() > y.innerText.toLowerCase()) {
                     //if so, mark as a switch and break the loop:
